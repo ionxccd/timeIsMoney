@@ -19,7 +19,7 @@ function getPriceInTime(wage, per, price){
     if (truePrice < 1){
         return (truePrice * 60).toFixed(2) + " minutes"
     }
-    return truePrice + " hours";
+    return truePrice + [truePrice > 1 ? " hours" : " hour"];
 }
 
 function createIcon(price) {
@@ -39,6 +39,7 @@ function createIcon(price) {
         text-align: center;
         padding: 5px 0;
         border-radius: 6px;
+        font-size:12px;
         
         /* Position the tooltip text - see examples below! */
         position: absolute;
@@ -49,7 +50,7 @@ function createIcon(price) {
     `
 
     const icon = document.createElement('img');
-    icon.src = "https://picsum.photos/200";
+    icon.src = "https://d18vdu4p71yql0.cloudfront.net/libraries/icon_archive/add.png";
     icon.addEventListener("mouseover", () =>{tooltiptext.style.visibility = "visible"}, true)
     icon.addEventListener("mouseleave", () =>{tooltiptext.style.visibility = "hidden"}, true)
     icon.className = "icon";

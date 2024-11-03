@@ -11,3 +11,12 @@
 
 }
 
+div{
+    display:inline;
+    flex-direction: row;
+}
+
+input{
+    height: 20px;
+    width: 80px;
+}
