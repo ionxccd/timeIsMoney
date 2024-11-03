@@ -1,36 +1,26 @@
 const priceWhole = document.querySelectorAll("span.a-price-whole");
 const priceDecmial = document.querySelectorAll("span.a-price-fraction");
 const price = document.querySelectorAll("span.a-price span.a-offscreen")
+const wage = 16.50
+const per = "hourly"
 
-priceWhole.forEach((element, index) => {
-    const decmial = priceDecmial[index];
-    const fullPrice = parseFloat(element.textContent + decmial.textContent)
-    console.log(fullPrice)
-})
+
 console.log("testing testing")
 
 // price.forEach(element => {
 //     console.log(element.textContent)
 // })
 // console.log("testin")
-const linkElement = document.createElement('link');
-    
-// Set attributes for the link element
-linkElement.setAttribute('rel', 'stylesheet');
-linkElement.setAttribute('type', 'text/css');
-linkElement.setAttribute('href', "styles.css");
 
-// Optional: Add load event listener
-linkElement.addEventListener('load', () => {
-    console.log('CSS file loaded successfully');
-});
-
-// Optional: Add error handling
-linkElement.addEventListener('error', (error) => {
-    console.error('Error loading CSS file:', error);
-});
-
-document.head.appendChild(linkElement);
+function getPriceInTime(wage, per, price){
+    price = price / wage;
+    truePrice = price.toFixed(2)
+    console.log(truePrice);
+    if (truePrice < 1){
+        return (truePrice * 60).toFixed(2) + " minutes"
+    }
+    return truePrice + " hours";
+}
 
 function createIcon(price) {
     const container = document.createElement("div");
@@ -40,9 +30,9 @@ function createIcon(price) {
     `
 
     const tooltiptext = document.createElement("span");
-    tooltiptext.innerText = "My test";
+    tooltiptext.innerText = "This item will cost you: " + getPriceInTime(wage, per, price);
     tooltiptext.style.cssText = `
-        visibility: visible;
+        visibility: hidden;
         background-color: black;
         color: #fff;
         font-size:10px;
@@ -53,15 +43,15 @@ function createIcon(price) {
         /* Position the tooltip text - see examples below! */
         position: absolute;
         top:100%;
-        left:50%;
-        margin-left:-60px;
-        width:120%;
+        width:100px;
+
         z-index: 1;
     `
 
     const icon = document.createElement('img');
     icon.src = "https://picsum.photos/200";
-    icon.addEventListener("mouseover", () =>{tooltiptext.style.visibility = true}, false)
+    icon.addEventListener("mouseover", () =>{tooltiptext.style.visibility = "visible"}, true)
+    icon.addEventListener("mouseleave", () =>{tooltiptext.style.visibility = "hidden"}, true)
     icon.className = "icon";
     icon.style.cssText = `
         width: 20px;
@@ -79,7 +69,7 @@ function createIcon(price) {
 if (priceDecmial && priceDecmial.length > 0) {
     
     priceDecmial.forEach((priceElement, index) => {
-        const decmial = priceWhole[index];
+        const decmial = priceWhole[index+1];
         const fullPrice = parseFloat(decmial.textContent + priceElement.textContent)
         // console.log(priceElement.textContent)
         const icon = createIcon(fullPrice);
