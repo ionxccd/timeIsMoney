@@ -1,0 +1,20 @@
+{
+	"manifest_version":3,
+	"name":"TimeIsMoney",
+	"description":"A extension for exposing the true price of goods and servies",
+	"version":"1.0",
+	"action": {
+		"default_popup": "main.html",
+		"default_icon": "ionxccd.PNG"
+	},
+	"content_scripts": [
+    {
+      "js": ["scripts/background.js"],
+      "matches": [
+        "https://www.amazon.com/s?k=*",
+        "https://developer.chrome.com/docs/webstore/*"
+      ]
+    }
+  ],
+	"permissions": ["activeTab"]
+}
